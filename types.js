@@ -1,0 +1,80 @@
+exports.types = [ 
+  { id: '170178',
+    name: 'Keskkonnamõju hindamise teated',
+    priority: 7 },
+  { id: '170162', 
+    name: 'Geoloogilise uuringu load', 
+    priority: 6 },
+  { id: '170163',
+    name: 'Geoloogilise uuringu loa taotlemisteated',
+    priority: 6 },
+  { id: '170176',
+    name: 'Kaevandamisloa taotlemisteated',
+    priority: 5 },
+  { id: '170177',
+    name: 'Kaevandamisloa väljastamisteated',
+    priority: 5 },
+  { id: '170251',
+    name: 'Loodusobjekti kaitse alla võtmise teated',
+    priority: 4 },
+  { id: '301253',
+    name: 'Saastuse kompleksloa väljastamise teated',
+    priority: 3 },
+  { id: '301254',
+    name: 'Saastuse kompleksloa taotlemise teated',
+    priority: 3 },
+  { id: '170212',
+    name: 'Vee erikasutusloa taotlemise teated',
+    priority: 2 },
+  { id: '170213',
+    name: 'Vee erikasutusloa väljastamisteated',
+    priority: 2 },
+  { id: '170190',
+    name: 'Maa riigi omandisse jätmise teated',
+    priority: 1 },
+  { id: '170191',
+    name: 'Maakonnaplaneeringu kehtestamisteated',
+    priority: 1 },
+  { id: '170174', 
+    name: 'Jäätmeloa taotlemisteated', 
+    priority: 0 },
+  { id: '170175', 
+    name: 'Jäätmeloa andmise teated', 
+    priority: 0 },
+  { id: '170207', 
+    name: 'Saasteloa taotlemisteated', 
+    priority: 0 },
+  { id: '170208',
+    name: 'Saasteloa väljastamisteated',
+    priority: 0 },
+  { id: '170249',
+    name: 'Jahipiirkonna kasutusõiguse loa taotlemisteated',
+    priority: 0 },
+  { id: '170250',
+    name: 'Jahipiirkonna kasutusõiguse lubade teated',
+    priority: 0 },
+  { id: '301251',
+    name: 'Veemajanduskava algatamise menetluse teated',
+    priority: 0 },
+  { id: '301252',
+    name: 'Veemajanduskava kinnitamise teade',
+    priority: 0 },
+  { id: '532826',
+    name: 'Jäätmekavade algatamise teated',
+    priority: 0 },
+  { id: '580082',
+    name: 'Geneetiliselt muundatud organismide keskkonda viimise teated',
+    priority: 0 } 
+  ]
+  
+exports.ids = function() {
+
+  var keys = []
+
+  exports.types.forEach(function(item) {
+    keys.push(item.id)
+  })
+
+  return keys.join(';')
+
+}
