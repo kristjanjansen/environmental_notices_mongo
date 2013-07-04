@@ -19,6 +19,7 @@ mongo.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
       
   collection.insert(data, {w:1}, function(err, result) {
     console.log(result)
+    db.close()
   });
 
 });
