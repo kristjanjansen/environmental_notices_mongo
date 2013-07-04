@@ -88,9 +88,12 @@ function select(ctx, next) {
   if (ctx.params.id) {
     var id = ctx.params.id 
     $('#list #' + id).toggleClass('selected')
-    $('html, body').animate({
+ /*   $('html, body').animate({
     	scrollTop: $('#list #' + id).offset().top
-    }, 200);
+    }, 200);*/
+    $('#list').animate({
+         scrollTop: $('#list').scrollTop() + $('#list #' + id).position().top - 35
+     }, 300);
     ctx.data.markers.forEach(function(item) {
       if (item.id == id) center = item.geom.coordinates
     })

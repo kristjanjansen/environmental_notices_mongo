@@ -1,12 +1,31 @@
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
 body {
   font-family: sans-serif;
 }
-#map {
-  width: 300px;
-  height: 200px;
+
+#sidebar {
+  position:absolute;
+  top: 0;
+  left:0;
+  bottom:0;
+  width: 320px;
+  height: 100%; 
 }
+
+#nav {
+  height: 50px;
+  font-size: 20px;  
+  border-bottom: 1px solid #aaa;
+}
+
 #list {
-  width: 300px;
+  overflow-y: scroll;
+  height: 100%;
+}
+/* @TODO add classname? */
+#list > div {
+  padding: 15px;
 }
 #list .selected {
   background: #eee;
@@ -22,4 +41,14 @@ body {
 }
 #list .selected .description {
   display: block;
+}
+
+#map {
+  position:absolute;
+  overflow:hidden;
+  top:0;
+  bottom:0;
+  left:321px;
+  right:0;
+  border-left: 1px solid #aaa;
 }
