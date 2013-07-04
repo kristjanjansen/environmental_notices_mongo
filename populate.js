@@ -15,7 +15,7 @@ mongo.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
           description: 'Lorem Ipsum bla bla bla', 
           type: 'Water well', 
           priority: 1, 
-          coords: [58.58,25.1], 
+          geom: {"type":"Point","coordinates":[22.69422358,59.07116279]}, 
           date: new moment().subtract('weeks', 2).format()
         },
         {
@@ -24,7 +24,7 @@ mongo.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
           description: 'Lorem Ipsum bla bla bla', 
           type: 'Some pump', 
           priority: 1, 
-          coords: [58.59,25.2], 
+          geom: {"type":"Point","coordinates":[26.72531934,58.32891397]}, 
           date: new moment().subtract('weeks', 1).format()
         },
         {
@@ -33,16 +33,16 @@ mongo.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
           description: 'Lorem Ipsum bla bla bla', 
           type: 'New mine', 
           priority: 2, 
-          coords: [58.58,25.4], 
+          geom: {"type":"Point","coordinates":[27.29506401,59.26591895]}, 
           date: new moment().format()
         },
         {
           id: 4, 
           title: 'Place D', 
           description: 'Lorem Ipsum bla bla bla', 
-          type: 'New mine', 
+          type: 'Another mine', 
           priority: 1, 
-          coords: [58.62,25.7], 
+          geom: {"type":"Point","coordinates":[25.63735671,58.3038225]}, 
           date: new moment().format()
         }
     ]

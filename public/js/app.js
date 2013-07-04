@@ -7,7 +7,7 @@ var moment = require('moment')
 
 var m = new gmap(document.getElementById('map'),{
   mapTypeId: 'hybrid', 
-  centerCoords: [58.58,25.1], 
+  centerCoords: [25.1,58.58], 
   zoom: 6,
   streetViewControl: false
 })
@@ -62,7 +62,7 @@ function list(ctx, next) {
   var tmpl = '\
     {{#markers }}\
       <div id="{{id}}">\
-      <h3>{{ title }}</h3>\
+      <h3>{{ type }}</h3>\
       <div class="description">\
       {{description}}\
       </div>\
@@ -85,7 +85,7 @@ function select(ctx, next) {
     var id = ctx.params.id 
     $('#list #' + id).toggleClass('selected')
     ctx.data.markers.forEach(function(item) {
-      if (item.id == id) center = item.coords
+      if (item.id == id) center = item.geom.coordinates
     })
     m.center(center)
   }
