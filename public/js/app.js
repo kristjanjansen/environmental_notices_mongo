@@ -92,7 +92,7 @@ function select(ctx, next) {
     	scrollTop: $('#list #' + id).offset().top
     }, 200);*/
     $('#list').animate({
-         scrollTop: $('#list').scrollTop() + $('#list #' + id).position().top - 35
+         scrollTop: $('#list').scrollTop() + $('#list #' + id).position().top - 50
      }, 300);
     ctx.data.markers.forEach(function(item) {
       if (item.id == id) center = item.geom.coordinates

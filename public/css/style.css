@@ -42,7 +42,9 @@ body {
 #list .selected .description {
   display: block;
 }
-
+h3 {
+  margin-top: 0;
+}
 #map {
   position:absolute;
   overflow:hidden;
