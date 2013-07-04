@@ -3,6 +3,7 @@ var each = require('each')
 var moment = require('moment')
 
 var types = require('./types')
+var parsers = require('./parsers')
 
 exports.processPage = function(collection, body, callback) {
 
@@ -26,13 +27,13 @@ exports.processPage = function(collection, body, callback) {
             return item.name === row.type
         })[0].priority
           
-        processRow(row, function(p_row) {
+        _processRow(row, function(p_row) {
   
-       //   if (p_row.childs.length < 2) {
-       //      p_row.childs.push(p_row)
-       //    }
-            p_row.childs = []
-            p_row.childs.push(p_row)
+          if (p_row.childs.length < 2) {
+             p_row.childs.push(p_row)
+         }
+    //        p_row.childs = []
+    //        p_row.childs.push(p_row)
             
             each(p_row.childs)
               .on('item', function(p_row, i, next) {
@@ -68,6 +69,31 @@ exports.processPage = function(collection, body, callback) {
 }
 
 
-function processRow(row, callback) {
-  return callback(row)
+function _processRow(row, callback) {
+  
+    var parser_ids = [
+      'short',
+      'kmh',
+      'sadr',
+      'biz',
+      'permit_waste',
+      'permit_complex',
+      'permit_air',
+      'permit_water',
+      'cad2',
+      'cad',
+      'br'    
+    ]
+
+    each(parser_ids)
+      .on('item', function(parser_id, i, next) {
+        parsers[parser_id](row, function(row) {
+          row = row
+          setTimeout(next, 0)
+        })
+      })
+      .on('end', function() {
+        return callback(row)    
+      })
+  
 }
