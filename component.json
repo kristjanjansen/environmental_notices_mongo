@@ -6,7 +6,8 @@
     "educabilia/gmap": "*",
     "learnboost/jsonp": "*",
     "component/moment": "*",
-    "kristjanjansen/moment-isocalendar": "*"
+    "kristjanjansen/moment-isocalendar": "*",
+    "matthewmueller/hogan": "*"
   },
   "scripts": [
     "public/js/app.js"

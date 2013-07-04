@@ -1,6 +1,7 @@
 var page = require('page')
 var $ = require('jquery')
 var gmap = require('gmap')
+var hogan = require('hogan')
 
 var moment = require('moment')
 require('moment-isocalendar')
@@ -51,7 +52,7 @@ function data(ctx, next) {
 function map(ctx, next) {
   m.addMarkers(ctx.data.markers)  
   m.on('marker.click', function(marker) {
-    page('/week/' + ctx.params.week + '/' + marker)
+    page('/week/' + ctx.params.week + '/' + ctx.data.markers[marker].id)
   })
   next()
 }
@@ -59,17 +60,14 @@ function map(ctx, next) {
 
 function list(ctx, next) {
   
-  // var tmpl = '<ul>{{#markers}}<li id="{{id}}">{{title}}</li>{{/markers}}</ul>'
-  // $('#list').html(hogan(tmpl, ctx.data))
-  
-  var i = 0
-  var contents = ''
-  ctx.data.markers.forEach(function(item) {
-    contents += '<li id="' + i + '">' + item.title + '</li>'
-    i++
-  })
-  $('#list').html(contents)
-  
+  var tmpl = '<ul>\
+    {{#markers}}\
+      <li id="{{id}}">{{title}}</li>\
+    {{/markers}}\
+    </ul>\
+  '
+  $('#list').html(hogan(tmpl, ctx.data))
+ 
   $('#list li').click(function(e){
     page('/week/' + ctx.params.week + '/' + $(this).attr('id'))
     e.preventDefault()
@@ -83,7 +81,9 @@ function select(ctx, next) {
   if (ctx.params.id) {
     var id = ctx.params.id 
     $('#list #' + id).toggleClass('selected')
-    center = ctx.data.markers[id].coords
+    ctx.data.markers.forEach(function(item) {
+      if (item.id == id) center = item.coords
+    })
     m.center(center)
   }
   next()  

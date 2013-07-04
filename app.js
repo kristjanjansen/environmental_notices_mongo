@@ -9,6 +9,7 @@ app.use(express.static(__dirname + '/public'))
 app.get('/config', function(req, res){
   res.send({key: 'value'});
 });
+
 app.get('/api/week/:week', function(req, res){
   mongo.connect('mongodb://localhost:27017/exampleDb', function(err, db) {
     var collection = db.collection('test');
@@ -20,6 +21,7 @@ app.get('/api/week/:week', function(req, res){
     });  
   })
 });
+
 app.get('/*', function(req, res){
   res.sendfile(__dirname + '/public/index.html');
 });
