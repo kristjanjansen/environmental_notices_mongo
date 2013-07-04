@@ -1,5 +1,6 @@
 express = require('express')
 var mongo = require('mongodb').MongoClient;
+var moment = require('moment')
 
 app = express()
 
@@ -11,7 +12,10 @@ app.get('/config', function(req, res){
 app.get('/api/data/:page', function(req, res){
   mongo.connect('mongodb://localhost:27017/exampleDb', function(err, db) {
     var collection = db.collection('test');
-    collection.find({page: parseInt(req.params.page)}).toArray(function(err, items) {
+    var page = parseInt(req.params.page);
+    var start = moment().subtract('days', page).hour(0).format()
+    var end = moment().subtract('days', page).hour(24).format()
+    collection.find({date: {$gte: start, $lt: end}}).toArray(function(err, items) {
       res.send({markers: items});
     });  
   })
