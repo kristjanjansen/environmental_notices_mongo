@@ -1,8 +1,8 @@
-var page = require('page');
-var $ = require('jquery');
-var gmap = require('gmap');
+var page = require('page')
+var $ = require('jquery')
+var gmap = require('gmap')
 
-var moment = require('moment');
+var moment = require('moment')
 require('moment-isocalendar')
 
 var m = new gmap(document.getElementById('map'),{
@@ -16,7 +16,7 @@ m.init(router)
 function router() {
   page('/*', config);
   page('/', function() {
-    page('/page/1')
+    page('/page/2')
   })
   page('/page/:page/:id?', data, map, list, pager, select);
   page({dispatch: true})
