@@ -16,7 +16,7 @@ app.get('/api/week/:week', function(req, res){
     var week = parseInt(req.params.week);
     var start = moment().week(week).startOf('week').add('days', 1).format()
     var end = moment().week(week).startOf('week').add('days', 8).format()
-    collection.find({date: {$gte: start, $lt: end}}).toArray(function(err, items) {
+    collection.find({date: {$gte: start, $lt: end}}).sort({priority: 1 }).toArray(function(err, items) {
       res.send({markers: items});
     });  
   })
