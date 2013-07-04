@@ -11,6 +11,12 @@ body {
 #list .selected {
   background: #eee;
 }
+#list .description-short {
+  display: block;
+}
+#list .selected .description-short {
+  display: none;
+}
 #list .description {
   display: none;
 }
