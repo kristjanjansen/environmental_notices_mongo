@@ -4,7 +4,6 @@
     "visionmedia/page.js": "*",
     "component/jquery": "*",
     "educabilia/gmap": "*",
-    "learnboost/jsonp": "*",
     "component/moment": "*",
     "matthewmueller/hogan": "*"
   },

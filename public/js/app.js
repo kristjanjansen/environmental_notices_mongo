@@ -4,7 +4,6 @@ var gmap = require('gmap')
 var hogan = require('hogan')
 
 var moment = require('moment')
-require('moment-isocalendar')
 
 var m = new gmap(document.getElementById('map'),{
   mapTypeId: 'hybrid', 
