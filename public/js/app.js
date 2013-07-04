@@ -63,9 +63,13 @@ function list(ctx, next) {
     {{#markers }}\
       <div id="{{id}}">\
       <h3>{{ type }} | {{ priority }}</h3>\
+      <div class="description-short">\
+      {{{description_short}}}\
+      </div>\
       <div class="description">\
       {{{description}}}\
       </div>\
+      <a href="{{url}}">Read more</a>\
       </div>\
     {{/markers}}\
   '
@@ -84,6 +88,9 @@ function select(ctx, next) {
   if (ctx.params.id) {
     var id = ctx.params.id 
     $('#list #' + id).toggleClass('selected')
+    $('html, body').animate({
+    	scrollTop: $('#list #' + id).offset().top
+    }, 200);
     ctx.data.markers.forEach(function(item) {
       if (item.id == id) center = item.geom.coordinates
     })

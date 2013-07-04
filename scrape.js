@@ -1,4 +1,4 @@
-//var CONFIG = require('config');
+var config = require('config');
 var request = require('request');
 var each = require('each')
 var moment = require('moment')
@@ -10,8 +10,8 @@ var process = require('./process')
 
 // Build URL array
 
-var start = (((1 || 1) - 1) * 10) + 1
-var stop = (((30 || 1) - 1) * 10) + 11 + (start - 1)
+var start = (((config.pageStart || 1) - 1) * 10) + 1
+var stop = (((config.pageCount || 1) - 1) * 10) + 11 + (start - 1)
 
 var urls = []
 
@@ -19,10 +19,10 @@ for (var i = start; i < stop; i = i + 10) {
   urls.push('http://www.ametlikudteadaanded.ee/index.php?act=1&salguskpvavald=' + moment().subtract('M', 1).format('DD.MM.YYYY') + '&sloppkpvavald=' + moment().format('DD.MM.YYYY') + '&steateliigid=' + types.ids() + '&srange=' + i + '-' + (i + 9));
 }
 
-mongo.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
+mongo.connect(config.mongoUrl, function(err, db) {
   
   if (err) { throw err }
-  var collection = db.collection('development');
+  var collection = db.collection(config.mongoCollection);
   collection.remove(function() {});
 
   each(urls)

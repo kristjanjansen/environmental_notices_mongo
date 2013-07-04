@@ -1,3 +1,4 @@
+config = require('config')
 express = require('express')
 var mongo = require('mongodb').MongoClient;
 var moment = require('moment')
@@ -11,9 +12,9 @@ app.get('/config', function(req, res){
 });
 
 app.get('/api/week/:week', function(req, res){
-  mongo.connect('mongodb://localhost:27017/exampleDb', function(err, db) {
+  mongo.connect(config.mongoUrl, function(err, db) {
     if (err) throw err;
-    var collection = db.collection('development');
+    var collection = db.collection(config.mongoCollection);
     var week = parseInt(req.params.week);
     var start = moment().week(week).startOf('week').add('days', 1).format()
     var end = moment().week(week).startOf('week').add('days', 8).format()

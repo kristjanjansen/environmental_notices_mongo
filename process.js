@@ -34,9 +34,7 @@ exports.processPage = function(collection, body, callback) {
           if (p_row.childs.length < 2) {
              p_row.childs.push(p_row)
          }
-    //        p_row.childs = []
-    //        p_row.childs.push(p_row)
-            
+
             each(p_row.childs)
               .on('item', function(p_row, i, next) {
                 var data = {
@@ -48,6 +46,7 @@ exports.processPage = function(collection, body, callback) {
                   description: p_row.description,
                   description: p_row.description,
                   description_short: p_row.description_short,
+                  url: 'http://www.ametlikudteadaanded.ee/index.php?act=1&teade=' + p_row.id.split('-')[0]
                 }
                 collection.insert(data, {w:1}, function(err, result) {
                   console.log(result)
