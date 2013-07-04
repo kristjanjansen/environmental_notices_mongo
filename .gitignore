@@ -1,4 +1,5 @@
 node_modules
 components
-.DS_Store
 public/build
+config
+.DS_Store
