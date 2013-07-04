@@ -50,7 +50,7 @@ function data(ctx, next) {
 
 function map(ctx, next) {
   m.addMarkers(ctx.data.markers)  
-  m.on('marker.click', function(marker) { console.log(ctx.data.markers[marker].id)
+  m.on('marker.click', function(marker) {
     page('/week/' + ctx.params.week + '/' + ctx.data.markers[marker].id)
   })
   next()
