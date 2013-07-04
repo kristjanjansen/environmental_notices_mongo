@@ -2,9 +2,18 @@ body {
   font-family: sans-serif;
 }
 #map {
-  width: 200px;
+  width: 300px;
   height: 200px;
 }
+#list {
+  width: 300px;
+}
 #list .selected {
-  font-weight: bold;
+  background: #eee;
+}
+#list .description {
+  display: none;
+}
+#list .selected .description {
+  display: block;
 }

@@ -50,7 +50,7 @@ function data(ctx, next) {
 
 function map(ctx, next) {
   m.addMarkers(ctx.data.markers)  
-  m.on('marker.click', function(marker) {
+  m.on('marker.click', function(marker) { console.log(ctx.data.markers[marker].id)
     page('/week/' + ctx.params.week + '/' + ctx.data.markers[marker].id)
   })
   next()
@@ -59,16 +59,20 @@ function map(ctx, next) {
 
 function list(ctx, next) {
   
-  var tmpl = '<ul>\
-    {{#markers}}\
-      <li id="{{id}}">{{title}}</li>\
+  var tmpl = '\
+    {{#markers }}\
+      <div id="{{id}}">\
+      <h3>{{ title }}</h3>\
+      <div class="description">\
+      {{description}}\
+      </div>\
+      </div>\
     {{/markers}}\
-    </ul>\
   '
   $('#list').html(hogan(tmpl, ctx.data))
  
-  $('#list li').click(function(e){
-    page('/week/' + ctx.params.week + '/' + $(this).attr('id'))
+  $('#list h3').click(function(e){
+    page('/week/' + ctx.params.week + '/' + $(this).parent().attr('id'))
     e.preventDefault()
   })
   
