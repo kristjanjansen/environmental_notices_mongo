@@ -62,9 +62,9 @@ function list(ctx, next) {
   var tmpl = '\
     {{#markers }}\
       <div id="{{id}}">\
-      <h3>{{ type }}</h3>\
+      <h3>{{ type }} | {{ priority }}</h3>\
       <div class="description">\
-      {{description}}\
+      {{{description}}}\
       </div>\
       </div>\
     {{/markers}}\

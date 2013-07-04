@@ -7,16 +7,18 @@ app = express()
 app.use(express.static(__dirname + '/public'))
 
 app.get('/config', function(req, res){
-  res.send({key: 'value'});
+  res.send({});
 });
 
 app.get('/api/week/:week', function(req, res){
   mongo.connect('mongodb://localhost:27017/exampleDb', function(err, db) {
-    var collection = db.collection('test');
+    if (err) throw err;
+    var collection = db.collection('development');
     var week = parseInt(req.params.week);
     var start = moment().week(week).startOf('week').add('days', 1).format()
     var end = moment().week(week).startOf('week').add('days', 8).format()
-    collection.find({date: {$gte: start, $lt: end}}).sort({priority: 1 }).toArray(function(err, items) {
+    // @TODO: filter out priority 0
+    collection.find({date: {$gte: start, $lt: end}}).sort({priority: -1, type: 1 }).toArray(function(err, items) {
       res.send({markers: items});
     });  
   })

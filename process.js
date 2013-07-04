@@ -17,7 +17,9 @@ exports.processPage = function(collection, body, callback) {
       if (i % 3 == 0) {
         
         var row = {}
-        var link = $(body_row).find('td.right a').attr('href').split('=')
+        var link = $(body_row).find('td.right a').attr('href')
+        if (link) {
+          link = link.split('=')
         row.id = link[link.length - 1] + '-0'
         row.date = moment($(body_row).find('td[width=85]').text().trim(), 'DD.MM.YYYY').format('YYYY-MM-DDTHH:mm:ssZ');
         row.type = $(body_row).find('td.teateliik').text().trim();
@@ -55,7 +57,7 @@ exports.processPage = function(collection, body, callback) {
         })
               
       }
-       
+    }
       setTimeout(next_row, 0)
       
     })
