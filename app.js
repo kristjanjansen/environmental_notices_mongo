@@ -20,7 +20,7 @@ app.get('/api/week/:week', function(req, res){
     var start = moment().week(week).startOf('week').add('days', 1).format()
     var end = moment().week(week).startOf('week').add('days', 8).format()
     // @TODO: filter out priority 0
-    collection.find({date: {$gte: start, $lt: end}}).sort({priority: -1, type: 1 }).toArray(function(err, items) {
+    collection.find({date: {$gte: start, $lt: end}, priority: {$ne: 0}}).sort({priority: -1, type: 1 }).toArray(function(err, items) {
       res.send({markers: items});
     });  
 });

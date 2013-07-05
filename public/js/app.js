@@ -43,8 +43,8 @@ function pager(ctx, next) {
   $('#next').attr('href', '/week/' + (w + 1))
   $('#prev').attr('href', (w > 1) ? '/week/' + (w - 1) : '')
   
-  var start = moment().week(w).startOf('week').add('days', 1).format('D MMM')
-  var end = moment().week(w).startOf('week').add('days', 7).format('D MMM')
+  var start = moment().week(w).startOf('week').add('days', 1).format('D. MMMM')
+  var end = moment().week(w).startOf('week').add('days', 7).format('D. MMMM')
   $('#week').html(start + ' — ' + end)
   
   next()
@@ -109,8 +109,8 @@ function select(ctx, next) {
      
     $('#list #' + id).toggleClass('selected')
     $('#list').animate({
-         scrollTop: $('#list').scrollTop() + $('#list #' + id).position().top - 105
-     }, 300);
+         scrollTop: $('#list').scrollTop() + $('#list #' + id).position().top - 119
+     }, 100);
    
    
     var currentItem = {}
