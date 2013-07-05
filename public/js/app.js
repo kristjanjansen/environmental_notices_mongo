@@ -6,7 +6,7 @@ var hogan = require('hogan')
 var moment = require('moment')
 
 var defaultCenter = [25.1,58.58]
-var defaultZoom = 6
+var defaultZoom = 7
 
 var m = new gmap(document.getElementById('map'),{
   mapTypeId: 'hybrid', 
@@ -73,9 +73,9 @@ function list(ctx, next) {
   
   var tmpl = '\
     {{#markers}}\
-      <div id="{{id}}">\
+      <div id="{{id}}" {{#geom}}class="geom"{{/geom}}>\
       <div class="slug">\
-        <h2>{{ type }} | {{#geom}}Geo!{{/geom}}</h2>\
+        <h2>{{ type }}</h2>\
         <div class="description-short">\
         {{{description_short}}}\
         </div>\
@@ -122,7 +122,7 @@ function select(ctx, next) {
     if (currentItem.geom !== null) {
       center = currentItem.geom.coordinates
       m.center(center)
-      m.zoom(12)
+      m.zoom(14)
     } else {
       m.zoom(defaultZoom)
     }
