@@ -94,6 +94,13 @@ h2 {
 .geom h2 {
   background: url(/images/marker.png) no-repeat top right;
 }
+.error {
+  border: none !important; /* @TODO fixme */
+  padding: 50px !important;
+  text-align: center;
+  font-size: 1.3em;
+  color: #aaa;
+}
 #map {
   position:absolute;
   overflow:hidden;

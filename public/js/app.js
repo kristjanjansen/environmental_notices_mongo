@@ -87,7 +87,7 @@ function list(ctx, next) {
       </div>\
     {{/markers}}\
     {{^markers}}\
-      No data for this week. Try other weeks\
+      <div class="error">No data for this week. Try other weeks</div>\
     {{/markers}}\
   '
   $('#list').html(hogan(tmpl, ctx.data))
