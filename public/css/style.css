@@ -13,7 +13,7 @@ body {
   width: 320px;
   height: 100%; 
 }
-#nav {
+#header {
   border-bottom: 1px solid #aaa; background: yellow;
 }
 #title {
@@ -28,22 +28,22 @@ h1 {
   padding-left: 40px;
 }
 #prev, #week, #next {
-  display: inline-block;
-  background: gray;
+  adisplay: inline-block;
+  abackground: gray;
 }
 #week {
   background: gray;
   text-align: center;
-  padding: 15px;
-  width: 227px;
+  apadding: 15px;
+  awidth: 227px;
 }
 #prev {
-  float: left;
-  padding: 15px;
+  afloat: left;
+  apadding: 15px;
 }
 #next {
-  float: right;
-  padding: 15px;
+  afloat: right;
+  apadding: 15px;
 }
 #list {
   overflow-y: scroll;
