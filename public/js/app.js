@@ -113,14 +113,19 @@ function select(ctx, next) {
      }, 300);
    
    
+    var currentItem = {}
+    
     ctx.data.markers.forEach(function(item) {
-      if (item.id == id && item.geom !== null) {
-        console.log(item) 
-        center = item.geom.coordinates
-        m.center(center)
-        m.zoom(12)
-      }
-    })
+      if (item.id == id) currentItem = item 
+    })      
+    
+    if (currentItem.geom !== null) {
+      center = currentItem.geom.coordinates
+      m.center(center)
+      m.zoom(12)
+    } else {
+      m.zoom(defaultZoom)
+    }
 
   } else {
 
