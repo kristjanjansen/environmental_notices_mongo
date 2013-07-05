@@ -88,9 +88,6 @@ function select(ctx, next) {
   if (ctx.params.id) {
     var id = ctx.params.id 
     $('#list #' + id).toggleClass('selected')
- /*   $('html, body').animate({
-    	scrollTop: $('#list #' + id).offset().top
-    }, 200);*/
     $('#list').animate({
          scrollTop: $('#list').scrollTop() + $('#list #' + id).position().top - 50
      }, 300);
