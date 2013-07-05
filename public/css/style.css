@@ -13,19 +13,36 @@ body {
   width: 320px;
   height: 100%; 
 }
-h1, h2 {
-  margin: 0;
+#nav {
+  border-bottom: 1px solid #aaa; background: yellow;
+}
+#title {
+  padding: 15px;
+  border-bottom: 1px solid #aaa; background: yellow;
 }
 h1 {
-  font-size: 1.8em;
+  background: url(/images/logo.png) no-repeat 0 center;
+  margin: 0;
+  font-size: 1.7em;
+  display: inline-block;
+  padding-left: 40px;
 }
-h2 {
-  font-size: 1.2em;
-  margin-bottom: 0.5em;
+#prev, #week, #next {
+  display: inline-block;
+  background: gray;
 }
-#header {
-  height: 100px;
-  border-bottom: 1px solid #aaa;
+#week {
+  background: gray;
+  text-align: center;
+  padding: 15px;
+  width: 227px;
+}
+#prev {
+  float: left;
+  padding: 15px;
+}
+#next {
+  float: right;
   padding: 15px;
 }
 #list {
@@ -51,9 +68,9 @@ h2 {
 #list .selected .description {
   display: block;
 }
-
 h2 {
-  margin-top: 0;
+  font-size: 1.2em;
+  margin: 0 0 0.5em 0;
   size: 0.6em;
 }
 #map {

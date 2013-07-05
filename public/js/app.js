@@ -38,7 +38,7 @@ function config(ctx, next){
 function pager(ctx, next) {
   var w = parseInt(ctx.params.week)
 
-  $('#title').attr('href', '/week/' + w)
+  $('#top').attr('href', '/week/' + w)
 
   $('#next').attr('href', '/week/' + (w + 1))
   $('#prev').attr('href', (w > 1) ? '/week/' + (w - 1) : '')
@@ -109,7 +109,7 @@ function select(ctx, next) {
      
     $('#list #' + id).toggleClass('selected')
     $('#list').animate({
-         scrollTop: $('#list').scrollTop() + $('#list #' + id).position().top - 100
+         scrollTop: $('#list').scrollTop() + $('#list #' + id).position().top - 105
      }, 300);
    
    
