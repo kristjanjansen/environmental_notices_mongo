@@ -12,7 +12,7 @@ var m = new gmap(document.getElementById('map'),{
   mapTypeId: 'hybrid', 
   centerCoords: defaultCenter, 
   zoom: defaultZoom,
-  streetViewControl: false
+//  streetViewControl: false
 })
 m.init(router)
 
