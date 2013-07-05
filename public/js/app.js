@@ -5,10 +5,13 @@ var hogan = require('hogan')
 
 var moment = require('moment')
 
+var defaultCenter = [25.1,58.58]
+var defaultZoom = 6
+
 var m = new gmap(document.getElementById('map'),{
   mapTypeId: 'hybrid', 
-  centerCoords: [25.1,58.58], 
-  zoom: 6,
+  centerCoords: defaultCenter, 
+  zoom: defaultZoom,
   streetViewControl: false
 })
 m.init(router)
@@ -30,11 +33,20 @@ function config(ctx, next){
   })
 }
 
+// @TODO: to nav()
 
 function pager(ctx, next) {
-  var p = parseInt(ctx.params.week)
-  $('#next').attr('href', '/week/' + (p + 1))
-  $('#prev').attr('href', (p > 1) ? '/week/' + (p - 1) : '')
+  var w = parseInt(ctx.params.week)
+
+  $('#title').attr('href', '/week/' + w)
+
+  $('#next').attr('href', '/week/' + (w + 1))
+  $('#prev').attr('href', (w > 1) ? '/week/' + (w - 1) : '')
+  
+  var start = moment().week(w).startOf('week').add('days', 1).format('D MMM')
+  var end = moment().week(w).startOf('week').add('days', 7).format('D MMM')
+  $('#week').html(start + ' — ' + end)
+  
   next()
 }
 
@@ -60,22 +72,27 @@ function map(ctx, next) {
 function list(ctx, next) {
   
   var tmpl = '\
-    {{#markers }}\
+    {{#markers}}\
       <div id="{{id}}">\
-      <h3>{{ type }} | {{ priority }}</h3>\
-      <div class="description-short">\
-      {{{description_short}}}\
+      <div class="slug">\
+        <h2>{{ type }} | {{#geom}}Geo!{{/geom}}</h2>\
+        <div class="description-short">\
+        {{{description_short}}}\
+        </div>\
       </div>\
       <div class="description">\
       {{{description}}}\
+      <p><a href="{{url}}">Keskkonnateated</a></p>\
       </div>\
-      <a href="{{url}}">Read more</a>\
       </div>\
+    {{/markers}}\
+    {{^markers}}\
+      <div><h2>No data for this week. Try other weeks</h2></div>\
     {{/markers}}\
   '
   $('#list').html(hogan(tmpl, ctx.data))
- 
-  $('#list h3').click(function(e){
+  
+  $('#list .slug').click(function(e){
     page('/week/' + ctx.params.week + '/' + $(this).parent().attr('id'))
     e.preventDefault()
   })
@@ -85,18 +102,37 @@ function list(ctx, next) {
 
 
 function select(ctx, next) {
+ 
   if (ctx.params.id) {
-    var id = ctx.params.id 
+ 
+    var id = ctx.params.id
+     
     $('#list #' + id).toggleClass('selected')
     $('#list').animate({
-         scrollTop: $('#list').scrollTop() + $('#list #' + id).position().top - 50
+         scrollTop: $('#list').scrollTop() + $('#list #' + id).position().top - 100
      }, 300);
+   
+   
     ctx.data.markers.forEach(function(item) {
-      if (item.id == id) center = item.geom.coordinates
+      if (item.id == id && item.geom !== null) {
+        console.log(item) 
+        center = item.geom.coordinates
+        m.center(center)
+        m.zoom(12)
+      }
     })
-    m.center(center)
+
+  } else {
+
+    $('#list').animate({
+         scrollTop: 0
+     }, 0);    
+    m.zoom(defaultZoom)
+    m.center(defaultCenter)
   }
+
   next()  
+
 }
 
 
