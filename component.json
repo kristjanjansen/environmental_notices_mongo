@@ -3,7 +3,7 @@
   "dependencies": {
     "visionmedia/page.js": "*",
     "component/jquery": "*",
-    "educabilia/gmap": "*",
+    "kristjanjansen/gmap": "*",
     "component/moment": "*",
     "matthewmueller/hogan": "*"
   },

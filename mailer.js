@@ -49,9 +49,6 @@ mongo.connect(config.mongoUrl, function(err, db) {
       subject: 'Test: Keskkonnateated ' + start.format('DD.MM.YYYY') + ' - ' + end.subtract('days', 1).format('DD.MM.YYYY'),
       html: hogan.compile(tmpl).render({items: items})
     }
-
-  console.log('Sent mail')
-  //db.close()
   
   /*
   smtpTransport.sendMail(mailOptions, function(err, res) {
@@ -61,6 +58,7 @@ mongo.connect(config.mongoUrl, function(err, db) {
         console.log("Message sent: " + res.message);
       }
       smtpTransport.close();
+      //db.close()
   });
   */
 
