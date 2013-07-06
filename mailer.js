@@ -13,15 +13,6 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
     }
 });
 
-
-mongo.connect(config.mongoUrl, function(err, db) {
-  if (err) throw err;
-  var collection = db.collection(config.mongoCollection);
-
-  var week = moment().subtract('weeks', 1).week()
-  var start = moment().week(week).startOf('week').add('days', 1)
-  var end = moment().week(week).startOf('week').add('days', 8)
-  
   var tmpl = '\
 {{#items}}\
 <b>{{type}}</b><br />\
@@ -39,7 +30,15 @@ Allikas: {{url}}<br />\
 Keskkonnateated<br />\
 http://keskkonnateated.ee<br />\
 keskkonnateated@gmail.com\
-  '
+'
+
+mongo.connect(config.mongoUrl, function(err, db) {
+  if (err) throw err;
+  var collection = db.collection(config.mongoCollection);
+
+  var week = moment().subtract('weeks', 1).week()
+  var start = moment().week(week).startOf('week').add('days', 1)
+  var end = moment().week(week).startOf('week').add('days', 8)
     
   collection.find({date: {$gte: start.format(), $lt: end.format()}, priority: {$ne: 0}}).sort({priority: -1, type: 1 }).toArray(function(err, items) {
     if (err) throw err;
