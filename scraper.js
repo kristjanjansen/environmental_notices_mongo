@@ -4,8 +4,8 @@ var each = require('each')
 var moment = require('moment')
 var mongo = require('mongodb').MongoClient
 
-var types = require('../lib/types')
-var process = require('../lib/process')
+var types = require('./lib/types')
+var process = require('./lib/process')
   
 
 // Build URL array
