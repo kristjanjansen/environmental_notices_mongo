@@ -23,34 +23,40 @@ mongo.connect(config.mongoUrl, function(err, db) {
   var end = moment().week(week).startOf('week').add('days', 8)
   
   var tmpl = '\
-    {{#items}}\
-    <b>{{type}}</b><br />\
-    Link: http://keskkonnateated.ee/{{week}}/{{id}}<br />\
-    {{date}}<br />\
-    Allikas: {{url}}<br />\
-    <br />\
-    {{description}}<br />\
-    <br />\
-    <br />\
-    {{/items}}\
-    ---<br />\
-    <br />\
-    Keskkonnateated<br />\
-    http://keskkonnateated.ee<br />\
-    keskkonnateated@gmail.com\
+{{#items}}\
+<b>{{type}}</b><br />\
+{{date}}<br />\
+http://keskkonnateated.ee/{{week}}/{{id}}<br />\
+<br />\
+{{{description}}}<br />\
+<br />\
+Allikas: {{url}}<br />\
+<br />\
+<br />\
+{{/items}}\
+---<br />\
+<br />\
+Keskkonnateated<br />\
+http://keskkonnateated.ee<br />\
+keskkonnateated@gmail.com\
   '
     
   collection.find({date: {$gte: start.format(), $lt: end.format()}, priority: {$ne: 0}}).sort({priority: -1, type: 1 }).toArray(function(err, items) {
     if (err) throw err;
-
+    
+    items = items.map(function(item) {
+      item.date = moment(item.date).format('DD.MM.YYYY')
+      item.week = week
+      return item
+    })
+    
     var mailOptions = {
       from: config.mailFrom,
       to: config.mailTo, 
-      subject: 'Test: Keskkonnateated ' + start.format('DD.MM.YYYY') + ' - ' + end.subtract('days', 1).format('DD.MM.YYYY'),
+      subject: 'Test2: Keskkonnateated ' + start.format('DD.MM.YYYY') + ' - ' + end.subtract('days', 1).format('DD.MM.YYYY'),
       html: hogan.compile(tmpl).render({items: items})
     }
   
-  /*
   smtpTransport.sendMail(mailOptions, function(err, res) {
       if (err) {
         throw err
@@ -58,9 +64,9 @@ mongo.connect(config.mongoUrl, function(err, db) {
         console.log("Message sent: " + res.message);
       }
       smtpTransport.close();
-      //db.close()
+      db.close()
   });
-  */
+  
 
   })
   
