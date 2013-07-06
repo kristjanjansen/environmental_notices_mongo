@@ -34,7 +34,8 @@ mongo.connect(config.mongoUrl, function(err, db) {
     })  
   })
   .on('end', function() {
-    db.close()
+    console.log('Scraper finished')
+//  db.close()
   });
 
     
