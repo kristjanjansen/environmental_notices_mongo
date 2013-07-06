@@ -1,11 +1,11 @@
-var config = require('config');
-var request = require('request');
+var config = require('config')
+var request = require('request')
 var each = require('each')
 var moment = require('moment')
 var mongo = require('mongodb').MongoClient
 
 var types = require('./lib/types')
-var process = require('./lib/process')
+var processors = require('./lib/processors')
   
 
 // Build URL array
@@ -28,14 +28,16 @@ mongo.connect(config.mongoUrl, function(err, db) {
   each(urls)
   .on('item', function(url, i, next) {
     request({url: url, encoding: 'binary'}, function (e, r, body) {
-      process.processPage(collection, body, function() {
+      processors.processPage(collection, body, function() {
         setTimeout(next, 0)
       })
     })  
   })
   .on('end', function() {
     console.log('Scraper finished')
-    //  db.close()
+    db.close()
+    if (config.wait) process.stdin.resume()
+
   });
 
     
