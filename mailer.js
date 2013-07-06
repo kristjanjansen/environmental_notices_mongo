@@ -64,7 +64,6 @@ mongo.connect(config.mongoUrl, function(err, db) {
       }
       smtpTransport.close();
       db.close()
-      if (config.wait) process.stdin.resume()
       
   });
   

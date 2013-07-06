@@ -36,7 +36,6 @@ mongo.connect(config.mongoUrl, function(err, db) {
   .on('end', function() {
     console.log('Scraper finished')
     db.close()
-    if (config.wait) process.stdin.resume()
 
   });
 
