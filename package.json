@@ -4,6 +4,7 @@
   "dependencies": {
     "cheerio": "0.12.x",
     "config": "0.4.x",
+    "cron": "1.0.x",
     "each": "0.4.x",
     "express": "3.1.x",
     "hogan.js": "2.0.x",
