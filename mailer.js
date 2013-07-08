@@ -19,7 +19,7 @@ var job = new cron(config.mailCron, function() {
   {{#items}}\
   <b>{{type}}</b><br />\
   {{date}}<br />\
-  http://keskkonnateated.ee/{{week}}/{{id}}<br />\
+  http://keskkonnateated.ee/week/{{week}}/{{id}}<br />\
   <br />\
   {{{description}}}<br />\
   <br />\
@@ -54,7 +54,7 @@ var job = new cron(config.mailCron, function() {
       var mailOptions = {
         from: config.mailFrom,
         to: config.mailTo, 
-        subject: 'Test2: Keskkonnateated ' + start.format('DD.MM.YYYY') + ' - ' + end.subtract('days', 1).format('DD.MM.YYYY'),
+        subject: 'Keskkonnateated ' + start.format('DD.MM.YYYY') + ' - ' + end.subtract('days', 1).format('DD.MM.YYYY'),
         html: hogan.compile(tmpl).render({items: items})
       }
   
