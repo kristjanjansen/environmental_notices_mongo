@@ -19,7 +19,7 @@ var job = new cron(config.mailCron, function() {
   {{#items}}\
   <b>{{type}}</b><br />\
   {{date}}<br />\
-  http://keskkonnateated.ee/week/{{week}}/{{id}}<br />\
+  http://keskkonnateated.ee/week/{{week}}/{{id}} {{#geom}}(geokoordinaadid teada){{/geom}}<br />\
   <br />\
   {{{description}}}<br />\
   <br />\
